@@ -230,6 +230,20 @@ Reglas aplicadas:
 
 > En una frase: valida el envío, deriva origen/destino del cliente, calcula la tarifa según servicio + peso + distancia + tipo de paquete, asigna un código `CM-XXXXXXXX` único y lo deja en estado `CREADO`. Implementado en `CreateShipmentCommand` + `TariffCalculator`.
 
+#### Clientes para `idRemitente` / `idDestinatario`
+
+En el JSON de creación, `idRemitente` e `idDestinatario` referencian a un **Cliente** (`core.Clientes`). La ciudad del envío se deriva de la ciudad de cada cliente. Clientes sembrados en la base de datos de **desarrollo**:
+
+| Id | Nombre | Ciudad |
+|----|--------|--------|
+| 1 | Juan Gómez | Bogotá |
+| 2 | Carlos Méndez | Bogotá |
+| 3 | Ana Torres | Medellín |
+| 4 | Pedro Ruiz | Cali |
+| 5 | Laura Díaz | Barranquilla |
+
+> ⚠️ El remitente y el destinatario deben estar en **ciudades distintas** (si no, el envío se rechaza por no aplicar tarifa de distancia). Por ejemplo, `idRemitente: 1` (Bogotá) e `idDestinatario: 3` (Medellín) es una combinación válida; `1` y `2` (ambos Bogotá) no.
+
 ### Consultar envío
 
 `GET /api/shipments/{id}` devuelve un envío por su `Id` (lectura simple, `AsNoTracking` + proyección directa a DTO). Responde `200` con `{ id, codigoRastreo, estado, costo }`, o `404 Not Found` si no existe. Implementado en `GetShipmentQuery`.
