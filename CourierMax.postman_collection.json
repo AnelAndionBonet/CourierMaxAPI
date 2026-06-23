@@ -1,0 +1,104 @@
+{
+  "info": {
+    "name": "CourierMax API",
+    "description": "Colección de la API de CourierMax (envíos, asignación, SLA y métricas). Ajusta la variable baseUrl y los Id según los datos sembrados.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5096" },
+    { "key": "idEnvio", "value": "00000000-0000-0000-0000-000000000000" },
+    { "key": "idConductor", "value": "1" }
+  ],
+  "item": [
+    {
+      "name": "Shipments",
+      "item": [
+        {
+          "name": "Crear envío (RF-01)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/api/shipments", "host": ["{{baseUrl}}"], "path": ["api", "shipments"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idRemitente\": 3,\n  \"idDestinatario\": 4,\n  \"peso\": 5,\n  \"idUnidadPeso\": 8,\n  \"largo\": 30,\n  \"ancho\": 20,\n  \"alto\": 15,\n  \"idUnidadVolumen\": 9,\n  \"idTipoPaquete\": 8,\n  \"idTipoServicio\": 5,\n  \"usuario\": \"operador1\"\n}"
+            },
+            "description": "Crea un envío. Remitente y destinatario deben estar en ciudades distintas con tarifa de distancia definida. Devuelve 201 con código CM-XXXXXXXX y costo."
+          }
+        },
+        {
+          "name": "Consultar envío",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/shipments/{{idEnvio}}", "host": ["{{baseUrl}}"], "path": ["api", "shipments", "{{idEnvio}}"] }
+          }
+        },
+        {
+          "name": "Cambiar estado (RF-02)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/api/shipments/{{idEnvio}}/estado", "host": ["{{baseUrl}}"], "path": ["api", "shipments", "{{idEnvio}}", "estado"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"estadoDestino\": \"EN_TRANSITO\",\n  \"motivo\": null,\n  \"usuario\": \"operador1\"\n}"
+            },
+            "description": "Estados: CREADO -> ASIGNADO -> EN_TRANSITO -> ENTREGADO. CANCELADO desde cualquiera excepto ENTREGADO (motivo obligatorio, mín. 5 caracteres)."
+          }
+        },
+        {
+          "name": "Cancelar envío (RN-03)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/api/shipments/{{idEnvio}}/estado", "host": ["{{baseUrl}}"], "path": ["api", "shipments", "{{idEnvio}}", "estado"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"estadoDestino\": \"CANCELADO\",\n  \"motivo\": \"Cliente canceló el pedido\",\n  \"usuario\": \"operador1\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Asignar conductor (RF-03)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/api/shipments/{{idEnvio}}/asignar", "host": ["{{baseUrl}}"], "path": ["api", "shipments", "{{idEnvio}}", "asignar"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"usuario\": \"operador1\"\n}"
+            },
+            "description": "Asigna automáticamente el conductor activo con capacidad (peso y volumen) y menor carga actual."
+          }
+        },
+        {
+          "name": "Envíos atrasados (RF-05)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/shipments/atrasados?desde=2026-06-01&hasta=2026-06-30",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "shipments", "atrasados"],
+              "query": [
+                { "key": "desde", "value": "2026-06-01" },
+                { "key": "hasta", "value": "2026-06-30" }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Drivers",
+      "item": [
+        {
+          "name": "Métricas por conductor (RF-06)",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/drivers/{{idConductor}}/metricas", "host": ["{{baseUrl}}"], "path": ["api", "drivers", "{{idConductor}}", "metricas"] }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourierMax.API", "CourierMax.API.csproj", "{356980EA-DC7F-4253-9845-0B3579AA936D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DEEB8816-F47A-4153-8F21-9111707C0553}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{2152C697-4107-4D7C-BCF0-DCF634E87F2A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourierMax.UseCases", "..\CourierMax.UseCases\CourierMax.UseCases.csproj", "{25FF9B69-B9B6-41C3-AE35-C38E49F2B7CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourierMax.Dtos", "..\CourierMax.Dtos\CourierMax.Dtos.csproj", "{FAC42495-1D8B-4ABF-A57D-426825D96CD9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourierMax.Data", "..\CourierMax.Data\CourierMax.Data.csproj", "{3FF2051A-D234-4450-96C5-DCEFB132216E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourierMax.UseCases.Tests", "..\tests\CourierMax.UseCases.Tests\CourierMax.UseCases.Tests.csproj", "{9003C0E1-09CB-4DA0-9261-7BC7CB2B70C0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{356980EA-DC7F-4253-9845-0B3579AA936D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{356980EA-DC7F-4253-9845-0B3579AA936D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{356980EA-DC7F-4253-9845-0B3579AA936D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{356980EA-DC7F-4253-9845-0B3579AA936D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25FF9B69-B9B6-41C3-AE35-C38E49F2B7CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25FF9B69-B9B6-41C3-AE35-C38E49F2B7CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25FF9B69-B9B6-41C3-AE35-C38E49F2B7CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25FF9B69-B9B6-41C3-AE35-C38E49F2B7CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAC42495-1D8B-4ABF-A57D-426825D96CD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAC42495-1D8B-4ABF-A57D-426825D96CD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAC42495-1D8B-4ABF-A57D-426825D96CD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAC42495-1D8B-4ABF-A57D-426825D96CD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FF2051A-D234-4450-96C5-DCEFB132216E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FF2051A-D234-4450-96C5-DCEFB132216E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FF2051A-D234-4450-96C5-DCEFB132216E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FF2051A-D234-4450-96C5-DCEFB132216E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9003C0E1-09CB-4DA0-9261-7BC7CB2B70C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9003C0E1-09CB-4DA0-9261-7BC7CB2B70C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9003C0E1-09CB-4DA0-9261-7BC7CB2B70C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9003C0E1-09CB-4DA0-9261-7BC7CB2B70C0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{356980EA-DC7F-4253-9845-0B3579AA936D} = {DEEB8816-F47A-4153-8F21-9111707C0553}
+		{25FF9B69-B9B6-41C3-AE35-C38E49F2B7CA} = {DEEB8816-F47A-4153-8F21-9111707C0553}
+		{FAC42495-1D8B-4ABF-A57D-426825D96CD9} = {DEEB8816-F47A-4153-8F21-9111707C0553}
+		{3FF2051A-D234-4450-96C5-DCEFB132216E} = {DEEB8816-F47A-4153-8F21-9111707C0553}
+		{9003C0E1-09CB-4DA0-9261-7BC7CB2B70C0} = {2152C697-4107-4D7C-BCF0-DCF634E87F2A}
+	EndGlobalSection
+EndGlobal
