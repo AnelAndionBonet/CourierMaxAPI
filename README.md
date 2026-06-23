@@ -50,17 +50,29 @@ Se adoptó la **arquitectura Core-Driven** (estilo NetMentor): el **Core de caso
 - Herramienta EF Core: `dotnet tool restore` (el repo incluye un manifest con `dotnet-ef`)
 
 ### 1. Configurar la cadena de conexión
-En `CourierMaxAPI/appsettings.Development.json`, ajusta `ConnectionStrings:DefaultConnection`. Ejemplo (SQL Server local):
 
-```json
-{
-  "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost;Database=CourierMax;Trusted_Connection=True;TrustServerCertificate=True;"
-  }
-}
+La cadena de conexión **no se versiona** en el repositorio: el código la lee con `configuration.GetConnectionString("DefaultConnection")` desde la jerarquía de configuración de .NET, por lo que la fuente cambia según el entorno.
+
+**En local.** Provee la clave `ConnectionStrings:DefaultConnection` por un medio que no quede en el repo. La opción recomendada es *User Secrets*:
+
+```bash
+dotnet user-secrets init  --project CourierMaxAPI/CourierMax.API.csproj
+dotnet user-secrets set "ConnectionStrings:DefaultConnection" "Server=localhost;Database=CourierMax;Trusted_Connection=True;TrustServerCertificate=True;" --project CourierMaxAPI/CourierMax.API.csproj
 ```
 
-> Si vas a publicar el repo, no incluyas credenciales reales: usa *User Secrets* o variables de entorno.
+(También puedes definir una variable de entorno `ConnectionStrings__DefaultConnection`, con doble guion bajo.)
+
+**En Azure (App Service).** La cadena se define como **variable de entorno del App Service**, en la sección **Configuración → Cadenas de conexión**:
+
+| Campo | Valor |
+|-------|-------|
+| Nombre | `DefaultConnection` |
+| Valor | la cadena de conexión a Azure SQL |
+| Tipo | `SQLAzure` |
+
+El App Service la expone como variable de entorno (`SQLAZURECONNSTR_DefaultConnection`) que .NET mapea automáticamente a la sección `ConnectionStrings`; al tener mayor prioridad que los `appsettings`, es la que se usa en producción. Con esto, ni el repositorio ni los archivos `appsettings*.json` contienen credenciales.
+
+> **Nota sobre Azure Key Vault.** La intención inicial era guardar la cadena en **Azure Key Vault** y referenciarla desde el App Service. Por errores al crear los secretos en el Key Vault, se optó por usar directamente la **cadena de conexión del App Service** (descrita arriba), que cumple el mismo objetivo de no versionar credenciales. **Queda como mejora futura** migrar la cadena a Key Vault y referenciarla con `@Microsoft.KeyVault(SecretUri=...)` usando una identidad administrada.
 
 ### 2. Crear el esquema (migraciones EF Core)
 
