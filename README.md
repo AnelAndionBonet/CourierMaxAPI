@@ -72,7 +72,7 @@ dotnet user-secrets set "ConnectionStrings:DefaultConnection" "Server=localhost;
 
 El App Service la expone como variable de entorno (`SQLAZURECONNSTR_DefaultConnection`) que .NET mapea automáticamente a la sección `ConnectionStrings`; al tener mayor prioridad que los `appsettings`, es la que se usa en producción. Con esto, ni el repositorio ni los archivos `appsettings*.json` contienen credenciales.
 
-> **Nota sobre Azure Key Vault.** La intención inicial era guardar la cadena en **Azure Key Vault** y referenciarla desde el App Service. Por errores al crear los secretos en el Key Vault, se optó por usar directamente la **cadena de conexión del App Service** (descrita arriba), que cumple el mismo objetivo de no versionar credenciales. **Queda como mejora futura** migrar la cadena a Key Vault y referenciarla con `@Microsoft.KeyVault(SecretUri=...)` usando una identidad administrada.
+> **Nota sobre Azure Key Vault.** La intención inicial era guardar la cadena en **Azure Key Vault** y referenciarla desde el App Service. Por falta de permisos para crear los secretos en el Key Vault, se optó por usar directamente la **cadena de conexión del App Service** (descrita arriba), que cumple el mismo objetivo de no versionar credenciales. **Queda como mejora futura** migrar la cadena a Key Vault y referenciarla con `@Microsoft.KeyVault(SecretUri=...)` usando una identidad administrada.
 
 ### 2. Crear el esquema (migraciones EF Core)
 
