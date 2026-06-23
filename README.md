@@ -51,16 +51,7 @@ Se adoptó la **arquitectura Core-Driven** (estilo NetMentor): el **Core de caso
 
 ### 1. Configurar la cadena de conexión
 
-La cadena de conexión **no se versiona** en el repositorio: el código la lee con `configuration.GetConnectionString("DefaultConnection")` desde la jerarquía de configuración de .NET, por lo que la fuente cambia según el entorno.
-
-**En local.** Provee la clave `ConnectionStrings:DefaultConnection` por un medio que no quede en el repo. La opción recomendada es *User Secrets*:
-
-```bash
-dotnet user-secrets init  --project CourierMaxAPI/CourierMax.API.csproj
-dotnet user-secrets set "ConnectionStrings:DefaultConnection" "Server=localhost;Database=CourierMax;Trusted_Connection=True;TrustServerCertificate=True;" --project CourierMaxAPI/CourierMax.API.csproj
-```
-
-(También puedes definir una variable de entorno `ConnectionStrings__DefaultConnection`, con doble guion bajo.)
+La cadena de conexión se lee con `configuration.GetConnectionString("DefaultConnection")` desde la jerarquía de configuración de .NET.
 
 **En Azure (App Service).** La cadena se define como **variable de entorno del App Service**, en la sección **Configuración → Cadenas de conexión**:
 
